@@ -1,0 +1,758 @@
+#playlistsBar, #playlistSpace, #videoSpace{
+    visibility: hidden;
+    transition: visibility 0.3s;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    width: 100%;
+    display: flex;
+    height: 100vh;
+
+    background-color: #1f2833;
+    font-family: Arial, sans-serif;
+    color: white;
+}
+
+a {
+    text-decoration: none;
+}
+
+i {
+    z-index: 20;
+    pointer-events: auto !important;
+}
+
+
+/* DASHBOARD */
+#dashboard {
+    min-width: 250px;
+    width: 15%;
+    height: 100%;
+    position: fixed;
+
+    color: #ecf0f1;
+    background-color: #2c3e50;
+    border: 1px #535C91 solid;
+
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.topBar {
+    display: flex;
+    padding: 20px;
+    height: 12vh;
+    min-height: 100px;
+}
+
+.profPic {
+    width: 30%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.profPic img {
+    width: 100%;
+    border-radius: 50%;
+}
+
+.profName {
+    width: 70%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    margin-top: 5%;
+    margin-left: 10px;
+}
+
+.middleBar {
+    height: 22vh;
+    padding: 20px;
+    min-height: 170px;
+}
+
+.playlistBar{
+    height: 54vh;
+    padding: 10px;
+    min-height: 120px;
+}
+
+.playlistBar-header{
+    width: 100%;
+    height: 5%;
+    font-weight: bold;
+    font-size: 100%;
+}
+
+.playlistBar-playlists{
+    height: 90%;
+    margin-top: 10px;
+    overflow: auto;
+}
+
+.playlists{
+    margin-bottom: 8px;
+    height: 60px;
+    display: flex;
+}
+
+.playlists-img img{
+    height: 60px;
+    width: 60px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.playlists-title{
+    padding: 10px;
+    font-size: 16px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    line-height: 1.4;
+    color: white;
+}
+
+.bottomBar {
+    height: 12vh;
+    width: 100%;
+    min-height: 75px;
+    padding: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: last baseline;
+}
+
+.button {
+    margin: auto;
+    background-color: #9290C3;
+    min-width: 150px;
+    width: 60%;
+    text-align: center;
+    color: #ecf0f1;
+    border-radius: 40px;
+    padding: 10px;
+    font-size: 100%;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+    user-select: none
+}
+
+.button:hover {
+    transform: scale(1.2);
+    color:#1f2833;
+}
+
+.featureBox{
+    margin-top: 8%;
+}
+
+.feature {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    background-color: #2c3e50;
+    color: #ecf0f1;
+    border: none;
+    border-radius: 8px;
+    margin-top: 10px;
+    padding: 10px;
+    font-size: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s, scale 0.3;
+}
+
+.button i{
+    margin-right: 5px;
+}
+
+.feature i{
+    margin-right: 10px;
+}
+
+.feature:hover, .playlists:hover, tr:hover {
+    background-color: #34495e;
+}
+
+/* PLAYLIST SPACE */
+#playlistSpace {
+    min-width: 250px;
+    width: 100%;
+    height: 100%;
+    margin-left: max(250px, 15%);
+    padding: 20px;
+
+    display: flex;
+    flex: 1;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 20px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.playlistTile {
+    min-width: 250px;
+    min-height: 300px;
+    height: calc(33% - 20px);
+    width: calc(25% - 20px);
+    border: 1px solid rgb(7, 15, 43);
+    border-radius: 8px;
+    padding: 20px;
+    
+    background-color: #9290C3;
+    color: #333; 
+    text-decoration: none;
+    
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+    opacity: 0.94;
+    position: relative;
+}
+
+.playlistTile:hover {
+    transform: scale(1.05);
+    opacity: 1;
+}
+
+.playlistTile .icons {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    gap: 10px;
+}
+
+.playlistTile .icons i {
+    color: #2c3e50;
+    font-size: 20px;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.playlistTile .icons i:hover {
+    color: rgb(80, 173, 226);
+}
+
+.playlistPic {
+    height: 50%;
+    position: relative;
+}
+
+.playlistPic img {
+    width: 100%;
+    height: 100%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+.star-icon {
+    border-radius: 20px;
+    background-color: rgba(0, 0, 0, 0.3);
+    padding: 5px;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    color: rgb(255, 240, 240);
+    font-size: 24px;
+    cursor: pointer;
+    transition: transform 0.3s, color 0.3s;
+}
+
+.star-icon:hover {
+    color: gold;
+}
+
+.favorite {
+    color: gold !important;
+}
+
+.playlistPic img {
+    width: 100%;
+    height: 100%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+.playlistTitle {
+    width: 100%;
+    height: 20%;
+    margin: 10px 0;
+
+    font-size: 24px;
+    font-weight: bold;
+
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.playlistDesc {
+    width: 100%;
+    height: 30%;
+    margin: 0;
+    padding: 5px;
+    font-size: 16px;
+
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    word-break: break-word;
+    display: -webkit-box;
+    overflow: hidden;
+    line-height: 1;
+}
+
+
+
+/* Videos UI */
+#videoSpace {
+    min-width: 580px;
+    width: 100%;
+    height: 100vh;
+    margin-left: max(250px, 15%);
+
+
+    display: flex;
+    flex: 1;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.playlistInfo {
+    display: flex;
+    min-height: 300px;
+    height: 30%;
+    width: 100%;
+    padding: 20px;
+    background-color: #31373d;
+    user-select: none
+}
+
+.playlistInfo-pic{
+    height: 100%;
+    width: 25%;
+    min-width: 100px;
+    
+}
+
+.playlistInfo-pic img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.playlistInfo-descriptions {
+    padding: 5px;
+    padding-left: 15px;
+    padding-right: 15px;
+    width: 75%;
+}
+
+.playlistInfo-titlebar{
+    width: 100%;
+    display: flex;
+}
+
+.playlistInfo-titlebar .icons {
+    width: 10%;
+    display: flex;
+    justify-content: end;
+}
+
+.playlistInfo-titlebar .icons i {
+    color: rgb(80, 173, 226);
+    font-size: 23px;
+    cursor: pointer;
+    vertical-align: middle;
+    transition: color 0.3s, transform 0.3s;
+    margin: 10px;
+}
+
+.playlistInfo-titlebar .icons i:hover {
+    color: #9290C3;
+    transform: scale(1.05);
+}
+
+.playlistInfo-title{
+    width: 90%;
+    height: 30%;
+    font-weight: bold;
+    font-size: 48px;
+
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.playlistInfo-mini{
+    height: 10%;
+    opacity: 0.85;
+}
+
+.playlistInfo-mini i{
+    margin-left: 10px;
+    margin-right: 5px;
+}
+
+.space{
+    margin-left: 40px;
+}
+
+.playlistInfo-description{
+    height: 60%;
+    opacity: 0.85;
+    padding-top: 10px;
+    font-size: 20px;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 6;
+    -webkit-box-orient: vertical;
+}
+
+.playlistVideos{
+    width: 100%;
+    height: 69.5%;
+}
+
+.playlistVideos table, .playlistVideos th, .playlistVideos td{
+    border: 1px solid black;
+}
+
+.playlistVideos table{
+    border-collapse: collapse;
+    width: 100%;
+    text-align: center;
+    margin: auto;
+}
+
+.playlistVideos th{
+    width: 20%;
+    height: 45px;
+    background-color: #374f5c;
+}
+
+.playlistVideos td{
+    height: 35px;
+    padding: 5px;
+}
+
+.videoName{
+    width: 35%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.channelName{
+    width: 20%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.videoAdded{
+    width: 15%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.actionTab{
+    width: 30%;
+}
+
+.actionTabButtons {
+    display: flex;
+    gap: 5%; /* Space between buttons */
+    justify-content: center;
+    padding: 2px 0px 2px 0px;
+    min-width: 475px;
+}
+
+.actionTabButtons button {
+    height: 100%;
+    width: 20%;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Space between icon and text */
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: #f1f1f1;
+    color: #333;
+}
+
+.watchButton {
+    background-color: #4CAF50; /* Green */
+    color: white;
+}
+
+.editButton {
+    background-color: #FFA500; /* Orange */
+    color: white;
+}
+
+.deleteButton {
+    background-color: #f44336; /* Red */
+    color: white;
+}
+
+.watchButton:hover {
+    background-color: #45a049;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+}
+
+.editButton:hover {
+    background-color: #ff9800;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+}
+
+.deleteButton:hover {
+    background-color: #e53935;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+}
+
+.actionTabButtons button i {
+    font-size: 18px;
+}
+
+
+/* MODAL */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 25; /* Sit on top */
+    padding-top: 10%; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+.modal-content {
+    position: relative;
+    background-color: #2e62c2;
+    margin: auto;
+    padding: 0;
+    border: 1px solid #888;
+    width: 40%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
+    animation-name: animatetop;
+    animation-duration: 0.4s;
+}
+
+@-webkit-keyframes animatetop {
+    from {top:-300px; opacity:0} 
+    to {top:0; opacity:1}
+}
+  
+@keyframes animatetop {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+}
+
+.close {
+    color: white;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.close:hover,
+.close:focus {
+    color: #2e62c2;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between; /* Distribute space between items */
+    align-items: center; /* Align items vertically */
+    padding: 2px 16px;
+    background-color: rgb(16, 41, 72);
+    color: white;
+}
+
+.modal-body {
+    padding: 20px;
+}
+
+.modal-footer {
+    border-top: 1px solid #888;
+    padding: 5px 16px;
+    background-color: rgb(16, 41, 72);
+    color: white;
+    display: flex;
+    justify-content: center; /* Center the button horizontally */
+}
+
+.req {
+    color: rgb(255, 40, 40) !important;
+}
+
+/* BUTTON */
+.modal-footer button {
+    border: 1px solid #095776;
+    background-color: #095776; 
+    color: #fff;
+    height: 25px;
+    width: 150px;
+    border-radius: 10px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.modal-footer button:hover {
+    border: 1px solid #fff;
+    font-weight: bold;
+}
+
+/* TEXT BOX */
+.modal-body div {
+    margin-bottom: 10px;
+}
+
+.modal-body input {
+    height: 28px;
+    width: 100%;
+    border-radius: 5px;
+    padding-left: 5px;
+    margin-top: 5px;
+}
+
+/* TEXTAREA */
+.modal-body textarea {
+    width: 100%;
+    height: 175px;
+    border-radius: 5px;
+    padding: 10px;
+    margin-top: 5px;
+    font-size: 16px;
+    resize: none;
+}
+
+#togglePicInput, #togglePicInput2, #togglePicInput3 {
+    height: 14px;
+    width: 14px;
+}
+
+.togglePic {
+    margin: 5px;
+    height: 14px;
+    font-size: 14px; 
+}
+
+/* DISPLAY VIDEO MODAL */
+#displayVideoModal .modal-content{
+    height: 100%;
+    width: 60%;
+    max-height: 620px;
+    position: relative;
+}
+
+#displayVideoModal .modal-body{
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+}
+
+#displayVideoModal .modal-content iframe{
+    width: 98%;
+    height: 91%;
+    position: absolute;
+    margin: auto;
+    border: none;
+}
+
+/* DASHBOARD BUTTON SPACE HIDE */
+#hide{
+    visibility: hidden;
+}
+
+/* ALL VIDEO WEB */
+#videoLists{
+    min-width: 250px;
+    width: 100%;
+    height: 100%;
+    margin-left: max(250px, 15%);
+    padding: 20px;
+    text-align: center;
+    visibility: hidden;
+}
+
+#videoLists table, #videoLists th, #videoLists td{
+    border: 1px solid black;
+}
+
+#videoLists table{
+    border-collapse: collapse;
+    width: 100%;
+    text-align: center;
+    margin: auto;
+    margin-top: 40px;
+    padding: 5px;
+}
+
+#videoLists th{
+    height: 45px;
+    background-color: #374f5c;
+}
+
+#videoLists td{
+    height: 35px;
+    padding: 5px;
+}
+
+.col_vid{
+    width: 30%;
+}
+
+.col_chan{
+    width: 15%;
+}
+
+.col_date{
+    width: 10%;
+}
+
+.col_play{
+    width: 15%;
+}
+
+.col_act{
+    width: 30%;
+}
